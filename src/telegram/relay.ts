@@ -145,19 +145,18 @@ async function main() {
     }
   };
 
-  client.addEventHandler(
-    handler,
-    new NewMessage({
-      chats: [source],
-      incoming: true,
-    })
-  );
+  const relayFilter = new NewMessage({
+    chats: [source],
+    incoming: true,
+  });
+
+  client.addEventHandler(handler, relayFilter);
 
   console.log("Relay is running. Press Ctrl+C to stop.");
 
   const cleanup = async () => {
     console.log("Disconnecting from Telegram...");
-    client.removeEventHandler(handler);
+    client.removeEventHandler(handler, relayFilter);
     await client.disconnect();
     process.exit(0);
   };
