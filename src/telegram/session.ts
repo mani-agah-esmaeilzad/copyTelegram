@@ -9,15 +9,16 @@ import { loadEnvFiles } from "@/telegram/config";
 loadEnvFiles();
 
 const apiIdValue = process.env.TELEGRAM_API_ID;
-const apiHash = process.env.TELEGRAM_API_HASH;
+const apiHashValue = process.env.TELEGRAM_API_HASH;
 
 if (!apiIdValue || Number.isNaN(Number(apiIdValue))) {
   throw new Error("Set TELEGRAM_API_ID in .env.local before running this script.");
 }
 
-if (!apiHash) {
+if (!apiHashValue) {
   throw new Error("Set TELEGRAM_API_HASH in .env.local before running this script.");
 }
+const apiHash = apiHashValue;
 
 const rl = readline.createInterface({ input, output });
 
